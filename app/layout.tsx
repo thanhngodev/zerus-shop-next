@@ -21,11 +21,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className="font-poppins antialiased">
-          <Header />
+          <div className="flex flex-col min-h-screen">
+            <Header />
 
-          {children}
+            <main className="flex-1">{children}</main>
 
-          <Footer />
+            <Footer />
+          </div>
         </body>
       </html>
     </ClerkProvider>

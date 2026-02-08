@@ -11,7 +11,6 @@ import Logo from "./Logo";
 
 const Header = async () => {
   const user = await currentUser();
-  console.log("user: ", user);
 
   return (
     <header className="sticky top-0 z-50 py-5 bg-white/70 backdrop-blur-md">
