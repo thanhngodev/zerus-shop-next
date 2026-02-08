@@ -1,6 +1,7 @@
 import Footer from "@/components/layouts/Footer";
 import Header from "@/components/layouts/Header";
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,14 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="font-poppins antialiased">
-        <Header />
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className="font-poppins antialiased">
+          <Header />
 
-        {children}
+          {children}
 
-        <Footer />
-      </body>
-    </html>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
