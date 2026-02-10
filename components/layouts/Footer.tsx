@@ -1,4 +1,4 @@
-import { categoriesData, quickLinksData } from "@/contants/data";
+import { categoriesData, quickLinksData } from "@/constants/data";
 import FooterTop from "../common/FooterTop";
 import SocialMedia from "../common/SocialMedia";
 import { SubTitle, SubText } from "../ui/text";

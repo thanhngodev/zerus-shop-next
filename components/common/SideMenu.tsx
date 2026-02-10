@@ -1,4 +1,4 @@
-import { headerData } from "@/contants/data";
+import { headerData } from "@/constants/data";
 import { X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
