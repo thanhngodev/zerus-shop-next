@@ -11,6 +11,8 @@ interface Props {
 }
 
 const AddToCartButton = ({ product, className }: Props) => {
+  const isOutOfStock = product?.stock === 0;
+
   return (
     <div className="w-full h-12 flex items-center">
       {/* {itemCount ? (
@@ -27,17 +29,16 @@ const AddToCartButton = ({ product, className }: Props) => {
           </div>
         </div>
       ) : ( */}
-        <Button
-          //   onClick={handleAddToCart}
-          //   disabled={isOutOfStock}
-          className={cn(
-            "w-full bg-shop_dark_green/80 text-lightBg shadow-none border border-shop_dark_green/80 font-semibold tracking-wide text-white hover:bg-shop_dark_green hover:border-shop_dark_green hoverEffect",
-            className,
-          )}
-        >
-          <ShoppingBag /> Add to Cart
-          {/* {isOutOfStock ? "Out of Stock" : "Add to Cart"} */}
-        </Button>
+      <Button
+        //   onClick={handleAddToCart}
+        disabled={isOutOfStock}
+        className={cn(
+          "w-full bg-shop_dark_green/80 text-lightBg shadow-none border border-shop_dark_green/80 font-semibold tracking-wide text-white hover:bg-shop_dark_green hover:border-shop_dark_green hoverEffect",
+          className,
+        )}
+      >
+        <ShoppingBag /> {isOutOfStock ? "Out of Stock" : "Add to Cart"}
+      </Button>
       {/* )} */}
     </div>
   );

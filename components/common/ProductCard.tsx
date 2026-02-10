@@ -48,9 +48,9 @@ const ProductCard = ({ product }: { product: Product }) => {
         )}
       </div>
 
-      <div className="p-3 flex flex-col gap-2">
+      <div className="p-3 flex flex-col gap-1">
         {product?.categories && (
-          <p className="uppercase line-clamp-1 text-xs font-medium text-lightText">
+          <p className="uppercase line-clamp-1 text-xs font-medium text-light-text">
             {product.categories.map((cat) => cat).join(", ")}
           </p>
         )}
@@ -58,17 +58,16 @@ const ProductCard = ({ product }: { product: Product }) => {
         <Title className="text-sm line-clamp-1 mb-0">{product?.name}</Title>
 
         <div className="flex items-center gap-2">
-          <p className="font-medium">In Stock</p>
           <p
-            className={`${product?.stock === 0 ? "text-red-600" : "text-shop_dark_green/80 font-semibold"}`}
+            className={`${product?.stock === 0 && "text-red-600"} text-shop_dark_green/80 font-semibold`}
           >
-            {(product?.stock as number) > 0 ? product?.stock : "unavailable"}
+            {(product?.stock as number) <= 0 && "unavailable"}
           </p>
         </div>
 
         <PriceView
           price={product?.price}
-          discount={product?.discount}
+          discount={product?.discount || undefined}
           className="text-sm"
         />
         <AddToCartButton product={product} className="w-full rounded-full" />
