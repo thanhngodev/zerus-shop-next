@@ -32,7 +32,7 @@ const ShopByBrands = async () => {
   const brands = await getAllBrands();
 
   return (
-    <section className="py-2 md:py-6 lg:py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-shop_light_bg rounded-md">
+    <section className="mb-10 lg:mb-20 py-2 md:py-6 lg:py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-shop_light_bg rounded-md">
       {/* Brands Section */}
       <div className="mb-4 text-center">
         <div className="flex flex-col items-center justify-between mb-4 md:flex-row md:mb-8">
@@ -45,7 +45,7 @@ const ShopByBrands = async () => {
             </p>
           </div>
           <Link
-            href="/shop"
+            href="/brand"
             className="inline-flex items-center mt-4 text-sm font-medium text-shop_light_green hover:text-shop_dark_green transition-colors md:mt-0"
           >
             View all brands
@@ -57,7 +57,7 @@ const ShopByBrands = async () => {
           {brands?.slice(0, 6).map((brand: Brand) => (
             <Link
               key={brand._id}
-              href={`/brand/${brand?.slug?.current}`}
+              href={`/brand`}
               className="group relative flex h-32 items-center justify-center rounded-xl bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-1"
             >
               {brand?.image && (

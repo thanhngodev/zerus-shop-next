@@ -1,5 +1,6 @@
 import HomeBanner from "@/components/common/HomeBanner";
 import HomeCategories from "@/components/common/HomeCategories";
+import LatestBlog from "@/components/common/LatestBlog";
 import ProductGrid from "@/components/common/ProductGrid";
 import ShopByBrands from "@/components/common/ShopByBrands";
 import Container from "@/components/layouts/Container";
@@ -14,6 +15,7 @@ const Home = async () => {
       <ProductGrid />
       <HomeCategories categories={categories} />
       <ShopByBrands />
+      <LatestBlog />
     </Container>
   );
 };

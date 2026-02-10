@@ -1,54 +1,58 @@
 import Logo from "@/components/layouts/Logo";
+import { ArrowLeft, HelpCircle, Home } from "lucide-react";
 import Link from "next/link";
+
 
 const NotFoundPage = () => {
   return (
-    <div className="bg-white flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-10 md:py-32">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen bg-linear-to-br from-shop_light_green/5 to-white flex items-center justify-center p-4">
+      <div className="max-w-2xl w-full">
         <div className="text-center">
-          <Logo />
+          <div className="flex justify-center mb-6">
+            <Logo />
+          </div>
 
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Looking for something?
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            We&apos;re sorry. The Web address you entered is not a functioning
-            page on our site.
+          <div className="inline-flex items-center justify-center px-4 py-2 bg-shop_light_green/10 rounded-full text-shop_dark_green text-sm font-medium mb-6">
+            404 - Page Not Found
+          </div>
+
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Oops! Lost in the digital world?
+          </h1>
+
+          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            The page you&apos;re looking for doesn&apos;t exist or has been
+            moved. Let&apos;s get you back on track.
           </p>
-        </div>
-        <div className="mt-8 space-y-6">
-          <div className="rounded-md shadow-sm space-y-4">
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
             <Link
               href="/"
-              className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-semibold rounded-md text-white bg-shop_dark_green/80 hover:bg-shop_dark_green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amazonOrangeDark hoverEffect"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-shop_dark_green hover:bg-shop_light_green text-white font-medium rounded-lg transition-all hover:shadow-lg transform hover:-translate-y-0.5"
             >
-              Go to Shopcart&apos;s home page
+              <Home className="h-5 w-5" />
+              Back to Home
             </Link>
+
             <Link
               href="/help"
-              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-semibold rounded-md text-amazonBlue bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amazonBlue"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-white text-gray-700 border border-gray-200 font-medium rounded-lg transition-all hover:bg-gray-50 hover:shadow-sm"
             >
-              Help
+              <HelpCircle className="h-5 w-5" />
+              Get Help
             </Link>
           </div>
-        </div>
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600">
-            Need help? Visit the{" "}
-            <Link
-              href="/help"
-              className="font-medium text-amazon-blue hover:text-amazon-blue-dark"
-            >
-              Help section
-            </Link>{" "}
-            or{" "}
+
+          <div className="border-t border-gray-100 pt-8">
+            <p className="text-gray-500 mb-4">Still need help?</p>
             <Link
               href="/contact"
-              className="font-medium text-amazon-blue hover:text-amazon-blue-dark"
+              className="inline-flex items-center text-shop_dark_green hover:text-shop_light_green font-medium group"
             >
-              contact us
+              Contact our support team
+              <ArrowLeft className="ml-1 h-4 w-4 transform group-hover:-translate-x-1 transition-transform" />
             </Link>
-          </p>
+          </div>
         </div>
       </div>
     </div>
