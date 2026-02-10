@@ -5,7 +5,7 @@ import Container from "@/components/layouts/Container";
 import { getCategories } from "@/sanity/queries";
 
 const Home = async () => {
-  const categories = await getCategories(3);
+  const categories = await getCategories(6);
 
   return (
     <Container className="bg-shop-light-pink">

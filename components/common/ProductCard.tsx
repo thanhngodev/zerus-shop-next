@@ -3,74 +3,94 @@ import { urlFor } from "@/sanity/lib/image";
 import { Flame } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Title } from "../ui/text";
 import AddToCartButton from "./AddToCartButton";
 import PriceView from "./PriceView";
 import ProductSideMenu from "./ProductSideMenu";
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <div className="text-sm border rounded-md border-darkBlue/20 group bg-white">
-      <div className="relative group overflow-hidden bg-shop_light_bg">
+    <div className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md">
+      {/* Image Section */}
+      <div className="relative aspect-square overflow-hidden bg-gray-50">
         {product?.images && (
-          <Link href={`/product/${product?.slug?.current}`}>
+          <Link
+            href={`/product/${product?.slug?.current}`}
+            className="block h-full w-full"
+          >
             <Image
               src={urlFor(product.images[0]).url()}
-              alt="productImage"
+              alt={product.name || "Product image"}
               width={500}
               height={500}
-              priority
-              className={`w-full h-64 object-contain overflow-hidden transition-transform bg-shop_light_bg duration-500 
-              ${product?.stock !== 0 ? "group-hover:scale-105" : "opacity-50"}`}
+              className={`h-full w-full object-cover transition-transform duration-500 ${
+                product?.stock !== 0 ? "group-hover:scale-105" : "opacity-60"
+              }`}
             />
+            {product?.stock === 0 && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-red-600 backdrop-blur-sm">
+                  Out of Stock
+                </span>
+              </div>
+            )}
           </Link>
         )}
 
-        <ProductSideMenu product={product} />
-
+        {/* Sale/Hot Badge */}
         {product?.status === "sale" ? (
-          <div className="absolute top-2 left-2 z-10">
-            <span className="inline-flex items-center justify-center px-2.5 py-1 text-xs font-medium rounded-full bg-red-500 text-white shadow-md group-hover:bg-red-600 transition-colors duration-300">
+          <div className="absolute left-2 top-2 z-10">
+            <span className="inline-flex items-center rounded-full bg-linear-to-r from-red-500 to-orange-500 px-2.5 py-1 text-xs font-semibold text-white shadow-md">
               Sale
             </span>
           </div>
         ) : (
-          <Link
-            href={"/deal"}
-            className="absolute top-2 left-2 z-10 border border-shop_orange/50 p-1 rounded-full group-hover:border-shop_orange hover:text-shop_dark_green hoverEffect"
-          >
-            <Flame
-              size={18}
-              fill="#fb6c08"
-              className="text-shop_orange/50 group-hover:text-shop_orange hoverEffect"
-            />
-          </Link>
+          product?.status === "hot" && (
+            <Link
+              href="/deal"
+              className="absolute left-2 top-2 z-10 rounded-full bg-white/90 p-1.5 shadow-sm backdrop-blur-sm transition-all hover:scale-110"
+            >
+              <Flame size={16} className="text-orange-500" fill="#fb6c08" />
+            </Link>
+          )
         )}
+
+        {/* Favorite Button */}
+        <ProductSideMenu product={product} className="right-2 top-2" />
       </div>
 
-      <div className="p-3 flex flex-col gap-1">
-        {product?.categories && (
-          <p className="uppercase line-clamp-1 text-xs font-medium text-light-text">
+      {/* Product Info */}
+      <div className="p-4">
+        {product?.categories && product?.categories?.length > 0 && (
+          <p className="mb-1 truncate text-xs font-medium uppercase tracking-wider text-gray-500">
             {product.categories.map((cat) => cat).join(", ")}
           </p>
         )}
 
-        <Title className="text-sm line-clamp-1 mb-0">{product?.name}</Title>
+        <Link
+          href={`/product/${product?.slug?.current}`}
+          className="mb-2 block"
+        >
+          <h3 className="font-medium text-gray-900 line-clamp-2 hover:text-shop_dark_green transition-colors">
+            {product?.name}
+          </h3>
+        </Link>
 
-        <div className="flex items-center gap-2">
-          <p
-            className={`${product?.stock === 0 && "text-red-600"} text-shop_dark_green/80 font-semibold`}
-          >
-            {(product?.stock as number) <= 0 && "unavailable"}
-          </p>
+        {/* Price */}
+        <div className="mt-3 flex items-center justify-between">
+          <PriceView
+            price={product?.price}
+            discount={product?.discount}
+            className="text-base font-semibold"
+          />
         </div>
 
-        <PriceView
-          price={product?.price}
-          discount={product?.discount || undefined}
-          className="text-sm"
-        />
-        <AddToCartButton product={product} className="w-full rounded-full" />
+        {/* Add to Cart Button */}
+        <div className="mt-4">
+          <AddToCartButton
+            product={product}
+            className="w-full rounded-lg border border-shop_dark_green/20 bg-shop_dark_green/90 py-2 text-sm font-medium text-white transition-colors hover:bg-shop_dark_green"
+          />
+        </div>
       </div>
     </div>
   );
