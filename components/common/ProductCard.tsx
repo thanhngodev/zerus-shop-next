@@ -70,7 +70,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           href={`/product/${product?.slug?.current}`}
           className="mb-2 block"
         >
-          <h3 className="font-medium text-gray-900 line-clamp-2 hover:text-shop_dark_green transition-colors">
+          <h3 className="font-medium text-gray-900 line-clamp-1 hover:text-shop_dark_green transition-colors">
             {product?.name}
           </h3>
         </Link>
@@ -79,7 +79,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <div className="mt-3 flex items-center justify-between">
           <PriceView
             price={product?.price}
-            discount={product?.discount}
+            discount={product?.discount || 0}
             className="text-base font-semibold"
           />
         </div>

@@ -10,16 +10,24 @@ interface Props {
 const PriceView = ({ price, discount, className }: Props) => {
   return (
     <div className="flex items-center justify-between">
-      <div className="flex items-start flex-col gap-1">
+      <div className="flex items-start gap-2">
         <PriceFormatter
           amount={price}
           className={cn("text-shop_dark_green", className)}
         />
-        {price && discount && (
+        {price && discount ? (
           <PriceFormatter
             amount={price + (discount * price) / 100}
             className={twMerge(
               "line-through text-xs font-normal text-zinc-500",
+              className,
+            )}
+          />
+        ) : (
+          <PriceFormatter
+            amount={0}
+            className={twMerge(
+              "line-through text-xs font-normal text-zinc-500 opacity-0",
               className,
             )}
           />
