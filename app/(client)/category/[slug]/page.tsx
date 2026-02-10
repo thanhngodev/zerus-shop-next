@@ -17,7 +17,11 @@ const CategoryPage = async ({
           <h1 className="text-2xl md:text-3xl font-bold text-darkColor mb-2">
             <span className="relative inline-block">
               <span className="relative z-10">
-                {slug && slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                {slug &&
+                  slug
+                    .split("-")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ")}
               </span>
               <span className="absolute bottom-1 left-0 w-full h-2 bg-shop_light_green/30 -rotate-1 z-0"></span>
             </span>

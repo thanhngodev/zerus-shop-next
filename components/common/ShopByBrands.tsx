@@ -57,10 +57,7 @@ const ShopByBrands = async () => {
           {brands?.slice(0, 6).map((brand: Brand) => (
             <Link
               key={brand._id}
-              href={{
-                pathname: "/shop",
-                query: { brand: brand.slug?.current },
-              }}
+              href={`/brand/${brand?.slug?.current}`}
               className="group relative flex h-32 items-center justify-center rounded-xl bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-1"
             >
               {brand?.image && (
