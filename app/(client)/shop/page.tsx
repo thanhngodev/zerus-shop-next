@@ -6,7 +6,7 @@ const ShopPage = async () => {
   const brands = await getAllBrands();
   
   return (
-    <div className="bg-white">
+    <div className="min-h-screen bg-linear-to-b from-shop_light_green/10 via-white to-white">
       <Shop categories={categories} brands={brands} />
     </div>
   );

@@ -12,36 +12,48 @@ interface Props {
 
 const BrandList = ({ brands, selectedBrand, setSelectedBrand }: Props) => {
   return (
-    <div className="w-full bg-white p-5">
-      <Title className="text-base font-black">Brands</Title>
-      <RadioGroup value={selectedBrand || ""} className="mt-2 space-y-1">
-        {brands?.map((brand) => (
-          <div
-            key={brand?._id}
-            onClick={() => setSelectedBrand(brand?.slug?.current as string)}
-            className="flex items-center space-x-2 hover:cursor-pointer"
-          >
-            <RadioGroupItem
-              value={brand?.slug?.current as string}
-              id={brand?.slug?.current}
-              className="rounded-sm"
-            />
-            <Label
-              htmlFor={brand?.slug?.current}
-              className={`${selectedBrand === brand?.slug?.current ? "font-semibold text-shop_dark_green" : "font-normal"}`}
-            >
-              {brand?.title}
-            </Label>
-          </div>
-        ))}
+    <div className="w-full border-t border-black/5 p-4">
+      <div className="flex items-center justify-between">
+        <Title className="text-sm font-black tracking-wide">Brands</Title>
         {selectedBrand && (
           <button
             onClick={() => setSelectedBrand(null)}
-            className="text-sm font-medium mt-2 underline underline-offset-2 decoration-1 hover:text-shop_dark_green hoverEffect text-left"
+            className="text-xs font-semibold text-shop_dark_green hover:text-darkRed hoverEffect"
           >
-            Reset selection
+            Reset
           </button>
         )}
+      </div>
+
+      <RadioGroup value={selectedBrand || ""}>
+        {brands?.map((brand) => {
+          const value = brand?.slug?.current as string;
+          const isSelected = selectedBrand === value;
+
+          return (
+            <div
+              key={brand?._id}
+              onClick={() => setSelectedBrand(value)}
+              className={`group flex items-center gap-3 rounded-xl border px-3 py-2 hover:cursor-pointer hover:shadow-sm hoverEffect ${
+                isSelected
+                  ? "border-shop_light_green/30 bg-linear-to-r from-shop_light_green/15 to-white"
+                  : "border-black/5 bg-white/60 hover:bg-white/80"
+              }`}
+            >
+              <RadioGroupItem value={value} id={value} className="rounded-sm" />
+              <Label
+                htmlFor={value}
+                className={`line-clamp-1 text-sm ${
+                  isSelected
+                    ? "font-semibold text-shop_dark_green"
+                    : "font-medium text-gray-700 group-hover:text-gray-900"
+                }`}
+              >
+                {brand?.title}
+              </Label>
+            </div>
+          );
+        })}
       </RadioGroup>
     </div>
   );

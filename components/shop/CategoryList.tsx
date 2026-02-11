@@ -15,39 +15,49 @@ const CategoryList = ({
   setSelectedCategory,
 }: Props) => {
   return (
-    <div className="w-full bg-white p-5">
-      <Title className="text-base font-black">Product Categories</Title>
-      <RadioGroup value={selectedCategory || ""} className="mt-2 space-y-1">
-        {categories?.map((category) => (
-          <div
-            onClick={() => {
-              setSelectedCategory(category?.slug?.current as string);
-            }}
-            key={category?._id}
-            className="flex items-center space-x-2 hover:cursor-pointer"
+    <div className="w-full p-4">
+      <div className="flex items-center justify-between">
+        <Title className="text-sm font-black tracking-wide">Categories</Title>
+        {selectedCategory && (
+          <button
+            onClick={() => setSelectedCategory(null)}
+            className="text-xs font-semibold text-shop_dark_green hover:text-darkRed hoverEffect"
           >
-            <RadioGroupItem
-              value={category?.slug?.current as string}
-              id={category?.slug?.current}
-              className="rounded-sm"
-            />
-            <Label
-              htmlFor={category?.slug?.current}
-              className={`${selectedCategory === category?.slug?.current ? "font-semibold text-shop_dark_green" : "font-normal"}`}
+            Reset
+          </button>
+        )}
+      </div>
+
+      <RadioGroup value={selectedCategory || ""}>
+        {categories?.map((category) => {
+          const value = category?.slug?.current as string;
+          const isSelected = selectedCategory === value;
+
+          return (
+            <div
+              key={category?._id}
+              onClick={() => setSelectedCategory(value)}
+              className={`group flex items-center gap-3 rounded-xl border px-3 py-2 hover:cursor-pointer hover:shadow-sm hoverEffect ${
+                isSelected
+                  ? "border-shop_light_green/30 bg-linear-to-r from-shop_light_green/15 to-white"
+                  : "border-black/5 bg-white/60 hover:bg-white/80"
+              }`}
             >
-              {category?.title}
-            </Label>
-          </div>
-        ))}
+              <RadioGroupItem value={value} id={value} className="rounded-sm" />
+              <Label
+                htmlFor={value}
+                className={`line-clamp-1 text-sm ${
+                  isSelected
+                    ? "font-semibold text-shop_dark_green"
+                    : "font-medium text-gray-700 group-hover:text-gray-900"
+                }`}
+              >
+                {category?.title}
+              </Label>
+            </div>
+          );
+        })}
       </RadioGroup>
-      {selectedCategory && (
-        <button
-          onClick={() => setSelectedCategory(null)}
-          className="text-sm font-medium mt-2 underline underline-offset-2 decoration-1 hover:text-shop_dark_green hoverEffect text-left"
-        >
-          Reset selection
-        </button>
-      )}
     </div>
   );
 };

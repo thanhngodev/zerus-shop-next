@@ -17,37 +17,52 @@ interface Props {
 }
 const PriceList = ({ selectedPrice, setSelectedPrice }: Props) => {
   return (
-    <div className="w-full bg-white p-5">
-      <Title className="text-base font-black">Price</Title>
-      <RadioGroup className="mt-2 space-y-1" value={selectedPrice || ""}>
-        {priceArray?.map((price, index) => (
-          <div
-            key={index}
-            onClick={() => setSelectedPrice(price?.value)}
-            className="flex items-center space-x-2 hover:cursor-pointer"
+    <div className="w-full border-t border-black/5 p-4">
+      <div className="flex items-center justify-between">
+        <Title className="text-sm font-black tracking-wide">Price</Title>
+        {selectedPrice && (
+          <button
+            onClick={() => setSelectedPrice(null)}
+            className="text-xs font-semibold text-shop_dark_green hover:text-darkRed hoverEffect"
           >
-            <RadioGroupItem
-              value={price?.value}
-              id={price?.value}
-              className="rounded-sm"
-            />
-            <Label
-              htmlFor={price.value}
-              className={`${selectedPrice === price?.value ? "font-semibold text-shop_dark_green" : "font-normal"}`}
+            Reset
+          </button>
+        )}
+      </div>
+
+      <RadioGroup value={selectedPrice || ""}>
+        {priceArray?.map((price, index) => {
+          const isSelected = selectedPrice === price?.value;
+
+          return (
+            <div
+              key={index}
+              onClick={() => setSelectedPrice(price?.value)}
+              className={`group flex items-center gap-3 rounded-xl border px-3 py-2 hover:cursor-pointer hover:shadow-sm hoverEffect ${
+                isSelected
+                  ? "border-shop_light_green/30 bg-linear-to-r from-shop_light_green/15 to-white"
+                  : "border-black/5 bg-white/60 hover:bg-white/80"
+              }`}
             >
-              {price?.title}
-            </Label>
-          </div>
-        ))}
+              <RadioGroupItem
+                value={price?.value}
+                id={price?.value}
+                className="rounded-sm"
+              />
+              <Label
+                htmlFor={price.value}
+                className={`text-sm ${
+                  isSelected
+                    ? "font-semibold text-shop_dark_green"
+                    : "font-medium text-gray-700 group-hover:text-gray-900"
+                }`}
+              >
+                {price?.title}
+              </Label>
+            </div>
+          );
+        })}
       </RadioGroup>
-      {selectedPrice && (
-        <button
-          onClick={() => setSelectedPrice(null)}
-          className="text-sm font-medium mt-2 underline underline-offset-2 decoration-1 hover:text-shop_dark_green hoverEffect"
-        >
-          Reset selection
-        </button>
-      )}
     </div>
   );
 };
