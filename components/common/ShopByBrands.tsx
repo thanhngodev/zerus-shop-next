@@ -82,17 +82,15 @@ const ShopByBrands = async () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm transition-all hover:shadow-md"
+              className="group relative overflow-hidden rounded-2xl bg-white p-4 shadow-sm transition-all hover:shadow-md"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-shop_light_green/10">
+              <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-shop_light_green/10">
                 {feature.icon}
               </div>
               <h3 className="text-lg font-semibold text-gray-900">
                 {feature.title}
               </h3>
-              <p className="mt-1 text-sm text-gray-600">
-                {feature.description}
-              </p>
+              <p className="text-sm text-gray-600">{feature.description}</p>
             </div>
           ))}
         </div>

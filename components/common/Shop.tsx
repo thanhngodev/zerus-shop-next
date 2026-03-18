@@ -80,7 +80,7 @@ const Shop = ({ categories, brands }: Props) => {
                 <Title className="text-base md:text-lg uppercase tracking-wide">
                   Get the products as your needs
                 </Title>
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="text-sm text-gray-600">
                   Filter by category, brand, and price.
                 </p>
               </div>
